@@ -28,6 +28,7 @@ def lotto_p():
 def prd_lotto():  # 로또 번호 예측 코드
     count_num = []
     min_list = []
+    bns_sum = 0
     for i in range(1, 46):
         count_num.append(0)
 
@@ -43,6 +44,9 @@ def prd_lotto():  # 로또 번호 예측 코드
         bns_num = txt.split("\n")[-4]
         for j in range(6):
             count_num[int(lotto_num[j]) - 1] += 1
+            # 보너스 번호를 계산하는데에 한 번만 쓰입니다.
+            if j == 0:
+                bns_sum += int(bns_num)
 
     for i in range(6):
         # count_num 의 최솟값에 해당하는 인덱스가 tmp 에 들어감.
@@ -50,7 +54,7 @@ def prd_lotto():  # 로또 번호 예측 코드
         min_list.append(tmp+1)
         count_num[tmp] = 100
 
-    print(min_list)
+    print(min_list, "+ 보너스 번호 [{}]".format(bns_num))
 
 
 def count_prd():
@@ -94,6 +98,3 @@ btn2.config(text="당첨번호 예측하기")
 btn2.config(command=count_prd)
 btn2.pack()
 win.mainloop()
-
-
-
