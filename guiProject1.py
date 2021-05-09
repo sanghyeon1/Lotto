@@ -45,12 +45,31 @@ def prd_lotto():  # 로또 번호 예측 코드
             count_num[int(lotto_num[j]) - 1] += 1
 
     for i in range(6):
-        # count_num의 최솟값에 해당하는 인덱스가 tmp에 들어감.
+        # count_num 의 최솟값에 해당하는 인덱스가 tmp 에 들어감.
         tmp = count_num.index(min(count_num))
         min_list.append(tmp+1)
         count_num[tmp] = 100
 
     print(min_list)
+
+
+def count_prd():
+    puts = ent.get()
+    if type(puts) == str and puts == '':
+        print("아무것도 입력되지 않았습니다.")
+    # 수정할 것.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    elif puts != '':
+        puts = int(puts)
+        if 0 < puts < 11:
+            print("로또 번호를 {}회 뽑습니다.".format(puts))
+            for i in range(puts):
+                print("{}회 : ".format(i+1))
+                prd_lotto()
+        elif puts >= 11:
+            print("입력 값이 너무 커서 프로그램이 느려집니다.")
+            print("1~10사이의 값을 입력하십시오.")
+        else:
+            print("Error 값입니다. 다시 입력하십시오.")
 
 
 win = Tk()
@@ -66,10 +85,13 @@ btn.config(text="로또 당첨 번호 확인")
 btn.config(command=lotto_p)
 btn.pack()
 
+ent = Entry(win)
+ent.pack()
+
 # 당첨번호 예측하기 버튼
 btn2 = Button(win)
 btn2.config(text="당첨번호 예측하기")
-btn2.config(command=prd_lotto)
+btn2.config(command=count_prd)
 btn2.pack()
 win.mainloop()
 
