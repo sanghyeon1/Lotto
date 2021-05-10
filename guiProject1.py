@@ -10,6 +10,7 @@ def ent_p():
 
 
 def lotto_p():
+
     n = ent.get()
     url = "https://www.dhlottery.co.kr/gameResult.do?method=byWin&drwNo={}".format(n)
     #  div class="win_result"
@@ -19,10 +20,9 @@ def lotto_p():
     num_list = txt.split("\n")[7:13]
     bonus = txt.split("\n")[-4]
 
-    print("당첨번호")
-    print(num_list)
-    print("보너스 번호")
-    print(bonus)
+    print("{}회차 당첨번호를 확인합니다.".format(n))
+    print("당첨번호 - {}".format(num_list))
+    print("보너스 번호 - {}".format(bonus))
 
 
 def prd_lotto():  # 로또 번호 예측 코드
@@ -46,22 +46,22 @@ def prd_lotto():  # 로또 번호 예측 코드
             count_num[int(lotto_num[j]) - 1] += 1
             # 보너스 번호를 계산하는데에 한 번만 쓰입니다.
             if j == 0:
-                bns_sum += int(bns_num)
+                count_num[int(bns_num) - 1] += 1
 
-    for i in range(6):
+    for i in range(7):
         # count_num 의 최솟값에 해당하는 인덱스가 tmp 에 들어감.
         tmp = count_num.index(min(count_num))
         min_list.append(tmp+1)
         count_num[tmp] = 100
 
-    print(min_list, "+ 보너스 번호 [{}]".format(bns_num))
+    print(min_list[0:6], "+ 보너스 번호 [{}]".format(min_list[6]))
 
 
 def count_prd():
     puts = ent.get()
     if type(puts) == str and puts == '':
         print("아무것도 입력되지 않았습니다.")
-    # 수정할 것.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     elif puts != '':
         puts = int(puts)
         if 0 < puts < 11:
