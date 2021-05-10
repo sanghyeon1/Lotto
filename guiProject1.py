@@ -20,7 +20,6 @@ def lotto_p():
     num_list = txt.split("\n")[7:13]
     bonus = txt.split("\n")[-4]
 
-    print("{}회차 당첨번호를 확인합니다.".format(n))
     print("당첨번호 - {}".format(num_list))
     print("보너스 번호 - {}".format(bonus))
 
@@ -66,9 +65,13 @@ def count_prd():
         puts = int(puts)
         if 0 < puts < 11:
             print("로또 번호를 {}회 뽑습니다.".format(puts))
+            print("{}초 정도 소요됩니다...".format(puts * 21))
             for i in range(puts):
-                print("{}회 : ".format(i+1))
+                if i > 0:
+                    print("\n{}초 정도 남았습니다...".format((puts-i)*21))
+                print("{}회 : ".format(i+1), end='')
                 prd_lotto()
+            print("완료되었습니다.")
         elif puts >= 11:
             print("입력 값이 너무 커서 프로그램이 느려집니다.")
             print("1~10사이의 값을 입력하십시오.")
